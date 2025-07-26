@@ -20,12 +20,12 @@
 //Simply removes < and > and limits the length of the message
 /proc/strip_html_simple(t,limit=MAX_MESSAGE_LEN)
 	var/list/strip_chars = list("<",">")
-	t = copytext(t,1,limit)
+	t = copytext_char(t,1,limit)
 	for(var/char in strip_chars)
-		var/index = findtext(t, char)
+		var/index = findtext_char(t, char)
 		while(index)
-			t = copytext(t, 1, index) + copytext(t, index+1)
-			index = findtext(t, char)
+			t = copytext_char(t, 1, index) + copytext_char(t, index+1)
+			index = findtext_char(t, char)
 	return t
 
 
@@ -290,7 +290,7 @@
 
 //Returns a string with the first element of the string capitalized.
 /proc/capitalize(t as text)
-	return uppertext(copytext(t, 1, 2)) + copytext(t, 2)
+	return uppertext(copytext_char(t, 1, 2)) + copytext_char(t, 2)
 
 //Centers text by adding spaces to either side of the string.
 /proc/dd_centertext(message, length)
