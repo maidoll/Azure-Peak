@@ -67,6 +67,6 @@
 		to_chat(src, "The game will start [postfix].")
 
 		SSvote.send_vote(client)
-		var/usedkey = ckey(key)
+		var/usedkey = (ckey in GLOB.anonymize) ? get_fake_key(ckey) : ckey
 		var/list/thinz = list("takes a seat.", "settles in.", "joins the session", "joins the table.", "becomes a player.")
 		SEND_TEXT(world, span_notice("[usedkey] [pick(thinz)]"))
