@@ -14,7 +14,7 @@
 	outfit = /datum/outfit/job/roguetown/orphan
 	display_order = JDO_ORPHAN
 	show_in_credits = FALSE
-	min_pq = -30
+	min_pq = -50
 	max_pq = null
 	round_contrib_points = 2
 

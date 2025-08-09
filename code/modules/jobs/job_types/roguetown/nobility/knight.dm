@@ -17,7 +17,7 @@
 
 	give_bank_account = 22
 	noble_income = 10
-	min_pq = 8
+	min_pq = -1
 	max_pq = null
 	round_contrib_points = 2
 

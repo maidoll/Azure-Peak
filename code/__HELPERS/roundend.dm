@@ -537,7 +537,7 @@
 	to_chat(C,"<a href='?src=[C];playerlistrogue=1'>* SHOW PLAYER LIST *</a>")
 	to_chat(C,"<a href='byond://?src=[C];viewstats=1'>* View Statistics *</a>")
 	C.show_round_stats(pick_assoc(GLOB.featured_stats))
-	C.commendsomeone(forced = TRUE)
+//	C.commendsomeone(forced = TRUE)
 
 /datum/action/report
 	name = "Show roundend report"

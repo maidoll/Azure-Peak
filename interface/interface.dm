@@ -216,10 +216,12 @@ Hotkey-Mode: (hotkey-mode must be on)
 		for(var/atom/movable/screen/grain/S in screen)
 			S.alpha = 55
 
+/*
 /client/verb/triggercommend()
 	set category = "OOC"
 	set name = "Commend Someone"
 	commendsomeone()
+*/
 
 /client/verb/roleplay_ad_view()
 	set category = "OOC"

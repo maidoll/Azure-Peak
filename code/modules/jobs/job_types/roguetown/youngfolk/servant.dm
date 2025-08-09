@@ -16,7 +16,7 @@
 	advclass_cat_rolls = list(CTAG_SERVANT = 20)
 	display_order = JDO_SERVANT
 	give_bank_account = TRUE
-	min_pq = -10
+	min_pq = -30
 	max_pq = null
 	round_contrib_points = 2
 	advjob_examine = TRUE
