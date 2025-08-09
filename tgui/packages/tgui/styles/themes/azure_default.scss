@@ -3,13 +3,18 @@
   src: url('~roguefont/pterra.ttf');
 }
 
+@font-face {
+  font-family: 'Dihjauti';
+  src: url('~roguefont/dihjauti.otf');
+}
+
 .theme-azure_default:root {
   --color-base: #141b15;
   --color-base-start: #141b15;
   --color-base-end: #141b15;
 
   --font-size: 12px;
-  --font-family: 'Pterra';
+  --font-family: 'Dihjauti';
 
   // Sidebar
   .SideBarDecoration {
