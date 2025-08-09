@@ -540,6 +540,7 @@
 	icon_state = "graggarplatehelm"
 	max_integrity = ARMOR_INT_HELMET_ANTAG
 	flags_inv = HIDEEARS|HIDEFACE|HIDESNOUT|HIDEHAIR|HIDEFACIALHAIR
+	var/active_item = FALSE
 
 /obj/item/clothing/head/roguetown/helmet/heavy/graggar/pickup(mob/living/user)
 	if(!HAS_TRAIT(user, TRAIT_HORDE))
@@ -548,6 +549,21 @@
 		user.IgniteMob()
 		user.Stun(40)
 	..()
+
+/obj/item/clothing/head/roguetown/helmet/heavy/graggar/equipped(mob/living/user, slot)
+	. = ..()
+	if(active_item)
+		return
+	if(slot == SLOT_HEAD)
+		active_item = TRUE
+		ADD_TRAIT(user, TRAIT_BITERHELM, TRAIT_GENERIC)
+
+/obj/item/clothing/head/roguetown/helmet/heavy/graggar/dropped(mob/living/user)
+	..()
+	if(!active_item)
+		return
+	active_item = FALSE
+	REMOVE_TRAIT(user, TRAIT_BITERHELM, TRAIT_GENERIC)
 
 /obj/item/clothing/head/roguetown/helmet/heavy/matthios/pickup(mob/living/user)
 	if(!HAS_TRAIT(user, TRAIT_COMMIE))
@@ -558,8 +574,8 @@
 	..()
 
 /obj/item/clothing/head/roguetown/helmet/heavy/zizo
-	name = "darksteel barbute"
-	desc = "A darksteel barbute. This one has an adjustable visor. Called forth from the edge of what should be known. In Her name."
+	name = "avantyne barbute"
+	desc = "A avantyne barbute. This one has an adjustable visor. Called forth from the edge of what should be known. In Her name."
 	adjustable = CAN_CADJUST
 	icon_state = "zizobarbute"
 	max_integrity = ARMOR_INT_HELMET_ANTAG

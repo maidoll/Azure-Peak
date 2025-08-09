@@ -299,10 +299,12 @@
 	name = "forgefiend flamberge"
 	desc = "This sword's creation took a riddle in its own making. A great sacrifice was made for a blade of perfect quality."
 	icon_state = "malumflamberge"
+	force = 28 // +3 force as a unique sword. Longsword isn't THAT good anyway
+	force_wielded = 33 // Also +3
 	max_integrity = 200
 
 /obj/item/rogueweapon/sword/long/zizo
-	name = "darksteel longsword"
+	name = "avantyne longsword"
 	desc = "A wicked, unconventional, and otherwordly blade that was created by no swordsmith - a manifestation of hate for the state of this world that follows no design principles but spite and anger."
 	icon_state = "zizosword"
 	sheathe_icon = "zizosword"
@@ -964,6 +966,8 @@
 	grid_height = 64
 	dropshrink = 0
 	bigboy = FALSE
+	force = 25 // Same statline as the cup hilted etruscan rapier
+	wdefense = 8
 
 /obj/item/rogueweapon/sword/cutlass
 	name = "cutlass"
