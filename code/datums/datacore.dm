@@ -131,6 +131,11 @@ GLOBAL_LIST_EMPTY(fake_ckeys)
 	while(!foundname)
 		var/looker = "[capitalize(pick(GLOB.first_names))] [pick(GLOB.ooctitle)]"
 		var/found
+		if(CL)
+			if(CL.gender == "male")
+				looker = "[capitalize(pick(GLOB.first_names_male))] [pick(GLOB.ooctitle)]"
+			if(CL.gender == "female")
+				looker = "[capitalize(pick(GLOB.first_names_female))] [pick(GLOB.ooctitle)]"
 		for(var/X in GLOB.fake_ckeys)
 			if(X == looker)
 				found = TRUE
