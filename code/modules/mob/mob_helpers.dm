@@ -102,24 +102,21 @@
 	var/counter=length_char(phrase)
 	var/newphrase=""
 	var/newletter=""
+	var/list/replacements_consonants = list(
+		"s" = "ch", "c" = "k",
+		"г" = "х", "к" = "х", "з" = "с", "ц" = "с", "ч" = "щ", "щ" = "шш", "п" = "б"
+		)
+	var/list/replacements_vowels = list(
+		"o" = "u", "a" = "ah",
+		"ы" = "'", "а" = "'", "е" = "э", "ё" = "'", "и" = "'", "о" = "'", "у" = "'", "ю" = "'"
+		)
 	while(counter>=1)
 		newletter=copytext_char(phrase,(leng-counter)+1,(leng-counter)+2)
 		if(rand(1,3)==3)
-			if(lowertext(newletter)=="o")
-				newletter="u"
-			if(lowertext(newletter)=="s")
-				newletter="ch"
-			if(lowertext(newletter)=="a")
-				newletter="ah"
-			if(lowertext(newletter)=="u")
-				newletter="oo"
-			if(lowertext(newletter)=="c")
-				newletter="k"
-		if(rand(1,20)==20)
-			if(newletter==" ")
-				newletter="...huuuhhh..."
-			if(newletter==".")
-				newletter=" *BURP*."
+			if(lowertext(newletter) in replacements_consonants)
+				newletter = replacements_consonants[lowertext(newletter)]
+			if(lowertext(newletter) in replacements_vowels)
+				newletter = replacements_vowels[lowertext(newletter)]
 		switch(rand(1,20))
 			if(1)
 				newletter+="'"
@@ -185,7 +182,8 @@
 	p = 1//1 is the start of any word
 	while(p <= n)//while P, which starts at 1 is less or equal to N which is the length_char.
 		var/n_letter = copytext_char(te, p, p + 1)//copies text from a certain distance. In this case, only one letter at a time.
-		if (prob(80) && (ckey(n_letter) in list("b","c","d","f","g","h","j","k","l","m","n","p","q","r","s","t","v","w","x","y","z")))
+		if (prob(80) && (ckey(n_letter) in list("b","c","d","f","g","h","j","k","l","m","n","p","q","r","s","t","v","w","x","y","z","б",
+		                                        "в", "г", "д", "ж", "з", "к", "л", "м", "н", "п", "р", "с", "т", "ф", "х", "ц", "ч", "ш", "щ")))
 			if (prob(10))
 				n_letter = text("[n_letter]-[n_letter]-[n_letter]-[n_letter]")//replaces the current letter with this instead.
 			else

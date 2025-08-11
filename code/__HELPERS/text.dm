@@ -826,22 +826,22 @@ GLOBAL_LIST_INIT(binary, list("0","1"))
 /proc/vocal_cord_torn(message)
 	message = uppertext(message)
 	if(prob(20))
-		message = pick("GHHHHHH...", "GLLLL...", "ZZRRRRR...")
+		message = pick("ГХХХХ...", "КХРРР...", "ГХРРРА...")
 	else
 		var/new_message = ""
 		var/m_len = length(message)
 		var/tracker = 1
 		while(tracker < m_len)
-			var/nletter = copytext(message, tracker, tracker + 1)
-			if(!(nletter in list("A", "E", "I", "O", "U", " ")) && (tracker % 2))
-				nletter = pick("GH", "SHK", "KSS", "SS", "GNHH")
+			var/nletter = copytext_char(message, tracker, tracker + 1)
+			if(!(nletter in list("A", "E", "I", "O", "U", " ", "А", "Я", "Э", "Е", "И", "Ы", "О", "Ё", "У", "Ю", ".")) && (tracker % 2))
+				nletter = pick("ГХ", "ШШ", "СС", "КХХС", "НГХХ")
 			else if((nletter == " ") && prob(50))
 				nletter = "... "
 			new_message += nletter
 			tracker++
-		for(var/uhoh in list("E", "I", "O"))
-			new_message = replacetext(new_message, uhoh, pick("H", "G", "GHHH", "GRRR", "GLLL", "ZZZGH", "GLRG", "... ", "RRR"))
-		new_message = replacetext(new_message, "U", pick("UHHH", "UH... "))
+		for(var/uhoh in list("E", "I", "O", "Э", "Е", "И", "Ы", "О", "Ё"))
+			new_message = replacetext_char(new_message, uhoh, pick("Х", "Г", "ГХХХХ", "ГРРР", "... ", "РРР"))
+		new_message = replacetext_char(new_message, "U", "У", pick("УУУУ", "У... "))
 		message = new_message
 	return message
 
