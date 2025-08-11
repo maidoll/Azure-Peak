@@ -829,19 +829,19 @@ GLOBAL_LIST_INIT(binary, list("0","1"))
 		message = pick("ГХХХХ...", "КХРРР...", "ГХРРРА...")
 	else
 		var/new_message = ""
-		var/m_len = length(message)
 		var/tracker = 1
-		while(tracker < m_len)
+		while(tracker < length(message))
 			var/nletter = copytext_char(message, tracker, tracker + 1)
 			if(!(nletter in list("A", "E", "I", "O", "U", " ", "А", "Я", "Э", "Е", "И", "Ы", "О", "Ё", "У", "Ю", ".")) && (tracker % 2))
 				nletter = pick("ГХ", "ШШ", "СС", "КХХС", "НГХХ")
-			else if((nletter == " ") && prob(50))
+			else if((nletter == " ") && prob(50) && tracker > 1)
 				nletter = "... "
 			new_message += nletter
 			tracker++
-		for(var/uhoh in list("E", "I", "O", "Э", "Е", "И", "Ы", "О", "Ё"))
-			new_message = replacetext_char(new_message, uhoh, pick("Х", "Г", "ГХХХХ", "ГРРР", "... ", "РРР"))
-		new_message = replacetext_char(new_message, "U", "У", pick("УУУУ", "У... "))
+		for(var/replaced_vowels in list("E", "I", "O", "Э", "Е", "И", "Ы", "О", "Ё"))
+			new_message = replacetext_char(new_message, replaced_vowels, pick("Х", "Г", "ГХХХХ", "ГРРР", "... ", "РРР"))
+		for(var/replaced_vowels in list("U", "У", "Ю"))
+			new_message = replacetext_char(new_message, replaced_vowels, pick("УУУУ", "У... "))
 		message = new_message
 	return message
 
