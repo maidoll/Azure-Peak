@@ -637,9 +637,9 @@
 		language = get_default_language()
 	if(istype(loc, /obj/item))
 		var/obj/item/I = loc
-		I.send_speech(message, 0, I, , spans, message_language=language)
+		I.send_speech(message, 0, I, , spans, message_language=language, message_mode = MODE_WHISPER)
 	else
-		send_speech(message, 0, src, , spans, message_language=language)
+		send_speech(message, 0, src, , spans, message_language=language, message_mode = MODE_WHISPER)
 
 /obj/item/speakerinq/Destroy()
 	SSroguemachine.scomm_machines -= src
