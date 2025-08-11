@@ -840,8 +840,8 @@ GLOBAL_LIST_INIT(binary, list("0","1"))
 			tracker++
 		for(var/replaced_vowels in list("E", "I", "O", "Э", "Е", "И", "Ы", "О", "Ё"))
 			new_message = replacetext_char(new_message, replaced_vowels, pick("Х", "Г", "ГХХХХ", "ГРРР", "... ", "РРР"))
-		for(var/replaced_vowels in list("U", "У", "Ю"))
-			new_message = replacetext_char(new_message, replaced_vowels, pick("УУУУ", "У... "))
+		for(var/replaced_u_sounds in list("U", "У", "Ю"))
+			new_message = replacetext_char(new_message, replaced_u_sounds, pick("УУУУ", "У... "))
 		message = new_message
 	return message
 

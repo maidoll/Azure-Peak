@@ -57,11 +57,11 @@ GLOBAL_LIST_EMPTY(preference_patrons)
 /// Returns TRUE if they satisfy the needed conditions.
 /datum/patron/proc/can_pray(mob/living/follower)
 	// Allows death-bed prayers
+	SHOULD_CALL_PARENT(TRUE)
 	if(follower.has_status_effect(STATUS_EFFECT_UNCONSCIOUS))
 		if(follower.has_status_effect(STATUS_EFFECT_SLEEPING))
 			to_chat(follower, span_danger("I mustn't be sleeping to pray!"))
 			return FALSE	//Stops praying just by sleeping.
-	SHOULD_CALL_PARENT(TRUE)
 	. = TRUE
 
 /// Called when a patron's follower prays to them.
