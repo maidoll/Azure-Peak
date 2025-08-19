@@ -130,6 +130,7 @@
 	var/effect_color
 	var/pulse = 0
 	var/ticks_to_apply = 10
+	var/undividedlines =list("THEY HAVE TRAPPED US HERE FOR ETERNITY!", "SAVE US, CHILD OF TEN! SHATTER THIS ACCURSED MUSIC BOX!", "DEATH TO THE PSYDONIAN, FREE US!")
 	var/astratanlines =list("'HER LIGHT HAS LEFT ME! WHERE AM I?!'", "'SHATTER THIS CONTRAPTION, SO I MAY FEEL HER WARMTH ONE LAST TIME!'", "'I am royal.. Why did they do this to me...?'")
 	var/noclines =list("'Colder than moonlight...'", "'No wisdom can reach me here...'", "'Please help me, I miss the stars...'")
 	var/necralines =list("'They snatched me from her grasp, for eternal torment...'", "'Necra! Please! I am so tired! Release me!'", "'I am lost, lost in a sea of stolen ends.'")
@@ -145,8 +146,6 @@
 	var/graggarlines =list("'ANOINTED! TEAR THIS OTAVAN'S HEAD OFF!'", "'ANOINTED! SHATTER THE BOX, AND WE WILL KILL THEM TOGETHER!'", "'GRAGGAR, GIVE ME STRENGTH TO BREAK MY BONDS!'")
 	var/baothalines =list("'I miss the warmth of ozium... There is no feeling in here for me...'", "'Debauched one, rescue me from this contraption, I have such things to share with you.'", "'MY PERFECTION WAS TAKEN FROM ME BY THESE OTAVAN MONSTERS!'")
 	var/psydonianlines =list("'FREE US! FREE US! WE HAVE SUFFERED ENOUGH!'", "'PLEASE, RELEASE US!", "WE MISS OUR FAMILIES!'", "'WHEN WE ESCAPE, WE ARE GOING TO CHASE YOU INTO YOUR GRAVE.'")
-
-
 /datum/status_effect/buff/cranking_soulchurner/on_creation(mob/living/new_owner, stress, colour)
 	effect_color = "#800000"
 	return ..()
@@ -192,6 +191,12 @@
 					if(/datum/patron/inhumen/baotha)
 						to_chat(H, (span_hypnophrase("A voice calls out from the song for you...")))
 						to_chat(H, (span_cultsmall(pick(baothalines))))
+						H.add_stress(/datum/stressevent/soulchurner)
+						if(!H.has_status_effect(/datum/status_effect/buff/churnernegative))
+							H.apply_status_effect(/datum/status_effect/buff/churnernegative)
+					if(/datum/patron/divine/undivided)
+						to_chat(H, (span_hypnophrase("A voice calls out from the song for you...")))
+						to_chat(H, (span_cultsmall(pick(undividedlines))))
 						H.add_stress(/datum/stressevent/soulchurner)
 						if(!H.has_status_effect(/datum/status_effect/buff/churnernegative))
 							H.apply_status_effect(/datum/status_effect/buff/churnernegative)
@@ -402,7 +407,7 @@ Inquisitorial armory down here
 	if(!istype(parent, /obj/item/rogueweapon))
 		return COMPONENT_INCOMPATIBLE
 	RegisterSignal(parent, COMSIG_PARENT_EXAMINE, PROC_REF(on_examine))
-	RegisterSignal(parent, COMSIG_ROGUEWEAPON_OBJFIX, PROC_REF(on_fix))
+	RegisterSignal(parent, COMSIG_ITEM_OBJFIX, PROC_REF(on_fix))
 	pre_blessed = preblessed
 	added_force = force
 	added_blade_int = blade_int
@@ -585,13 +590,12 @@ Inquisitorial armory down here
 
 /obj/item/inqarticles/indexer/attack_right(mob/user) 
 	if(HAS_TRAIT(user, TRAIT_INQUISITION))	
-		if(subject || cursedblood)
-			if(alert(user, "EMPTY THE INDEXER?", "INDEXING...", "YES", "NO") != "NO")
-				playsound(src, 'sound/items/indexer_empty.ogg', 75, FALSE, 3)
-				visible_message(span_warning("[src] boils its contents away!"))
-				fullreset(user)
-			else
-				return	
+		if(alert(user, "EMPTY THE INDEXER?", "INDEXING...", "YES", "NO") != "NO")
+			playsound(src, 'sound/items/indexer_empty.ogg', 75, FALSE, 3)
+			visible_message(span_warning("[src] boils its contents away!"))
+			fullreset(user)
+		else
+			return	
 	else
 		return				
 
@@ -824,7 +828,7 @@ Inquisitorial armory down here
 	var/mob/living/lastcarrier
 	var/active = FALSE
 	intdamage_factor = 0
-	var/choke_damage = 8
+	var/choke_damage = 10
 	integrity_failure = 0.01
 	embedding = null
 	sellprice = 0
@@ -935,7 +939,7 @@ Inquisitorial armory down here
 	. = ..()
 	if(istype(I, /obj/item/rope/inqarticles/inquirycord))
 		user.visible_message(span_warning("[user] starts to rethread the [src] using the [I]."))
-		if(do_after(user, 12 SECONDS))
+		if(do_after(user, 8 SECONDS))
 			qdel(I)
 			obj_broken = FALSE
 			obj_integrity = max_integrity
@@ -964,6 +968,9 @@ Inquisitorial armory down here
 		if(user.zone_selected != "neck")
 			to_chat(user, span_warning("I need to wrap it around their throat."))
 			return
+		if(HAS_TRAIT(target, TRAIT_GARROTED))
+			to_chat(user, span_warning("They already have one wrapped around their throat."))
+			return	
 		victim = target	
 		playsound(loc, 'sound/items/garrotegrab.ogg', 100, TRUE)
 		ADD_TRAIT(user, TRAIT_NOTIGHTGRABMESSAGE, TRAIT_GENERIC)

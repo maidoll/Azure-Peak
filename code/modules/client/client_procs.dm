@@ -443,16 +443,17 @@ GLOBAL_LIST_EMPTY(respawncounts)
 	data += "</div></div></div>"
 
 	// The Ten Section
-	var/astrata_followers = GLOB.patron_follower_counts["Astrata"] || 0
-	var/noc_followers = GLOB.patron_follower_counts["Noc"] || 0
-	var/necra_followers = GLOB.patron_follower_counts["Necra"] || 0
-	var/pestra_followers = GLOB.patron_follower_counts["Pestra"] || 0
-	var/dendor_followers = GLOB.patron_follower_counts["Dendor"] || 0
-	var/ravox_followers = GLOB.patron_follower_counts["Ravox"] || 0
-	var/xylix_followers = GLOB.patron_follower_counts["Xylix"] || 0
-	var/malum_followers = GLOB.patron_follower_counts["Malum"] || 0
-	var/abyssor_followers = GLOB.patron_follower_counts["Abyssor"] || 0
-	var/eora_followers = GLOB.patron_follower_counts["Eora"] || 0
+	var/undivided_followers = GLOB.patron_follower_counts["The Ten Undivided"] || 0 // counts towards all of the Ten influences
+	var/astrata_followers = GLOB.patron_follower_counts["Astrata"] +undivided_followers || 0
+	var/noc_followers = GLOB.patron_follower_counts["Noc"] +undivided_followers || 0
+	var/necra_followers = GLOB.patron_follower_counts["Necra"] +undivided_followers || 0
+	var/pestra_followers = GLOB.patron_follower_counts["Pestra"] +undivided_followers || 0
+	var/dendor_followers = GLOB.patron_follower_counts["Dendor"] +undivided_followers || 0
+	var/ravox_followers = GLOB.patron_follower_counts["Ravox"] +undivided_followers || 0
+	var/xylix_followers = GLOB.patron_follower_counts["Xylix"] +undivided_followers || 0
+	var/malum_followers = GLOB.patron_follower_counts["Malum"] +undivided_followers || 0
+	var/abyssor_followers = GLOB.patron_follower_counts["Abyssor"] +undivided_followers || 0
+	var/eora_followers = GLOB.patron_follower_counts["Eora"] +undivided_followers || 0
 
 	var/astrata_storyteller = /datum/storyteller/astrata
 	var/noc_storyteller = /datum/storyteller/noc
@@ -915,10 +916,16 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 		add_admin_verbs()
 		to_chat(src, get_message_output("memo"))
 		adminGreet()
-	if (mob && reconnecting)
+	if(mob && reconnecting)
 		var/area/joined_area = get_area(mob.loc)
 		if(joined_area)
 			joined_area.reconnect_game(mob)
+	else if(!BC_IsKeyAllowedToConnect(ckey))
+		src << "Sorry, but the server is currently only accepting whitelisted players.  Please see the discord to be whitelisted."
+		message_admins("[ckey] was denied a connection due to not being whitelisted.")
+		log_admin("[ckey] was denied a connection due to not being whitelisted.")
+		qdel(src)
+		return 0
 
 	add_verbs_from_config()
 	var/cached_player_age = set_client_age_from_db(tdata) //we have to cache this because other shit may change it and we need it's current value now down below.

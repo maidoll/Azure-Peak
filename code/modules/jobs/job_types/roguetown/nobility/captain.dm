@@ -81,7 +81,8 @@
 	backpack_contents = list(
 		/obj/item/storage/keyring/sheriff = 1,
 		/obj/item/rogueweapon/huntingknife/idagger/steel/special = 1,
-		/obj/item/rogueweapon/scabbard/sheath = 1
+		/obj/item/rogueweapon/scabbard/sheath = 1,
+		/obj/item/reagent_containers/glass/bottle/rogue/healthpot = 1,
 		)
 	H.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
 	H.adjust_skillrank(/datum/skill/combat/polearms, 4, TRUE)
@@ -138,7 +139,7 @@
 		if("Zweihander")
 			H.adjust_skillrank_up_to(/datum/skill/combat/swords, 5, TRUE)
 			r_hand = /obj/item/rogueweapon/greatsword/zwei
-			backl = /obj/item/gwstrap
+			backl = /obj/item/rogueweapon/scabbard/gwstrap
 		if("Great Mace")
 			H.adjust_skillrank_up_to(/datum/skill/combat/maces, 5, TRUE)
 			r_hand = /obj/item/rogueweapon/mace/goden/steel
@@ -148,11 +149,11 @@
 		if("Greataxe")
 			H.adjust_skillrank_up_to(/datum/skill/combat/axes, 5, TRUE)
 			r_hand = /obj/item/rogueweapon/greataxe/steel/doublehead
-			backl = /obj/item/gwstrap
+			backl = /obj/item/rogueweapon/scabbard/gwstrap
 		if("Estoc")
 			H.adjust_skillrank_up_to(/datum/skill/combat/swords, 5, TRUE)
 			r_hand = /obj/item/rogueweapon/estoc
-			backl = /obj/item/gwstrap
+			backl = /obj/item/rogueweapon/scabbard/gwstrap
 		if("Longsword & Shield")
 			H.adjust_skillrank_up_to(/datum/skill/combat/swords, 5, TRUE)
 			r_hand = /obj/item/rogueweapon/sword/long

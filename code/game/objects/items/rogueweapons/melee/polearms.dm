@@ -7,7 +7,7 @@
 	animname = "stab"
 	icon_state = "instab"
 	reach = 2
-	chargetime = 1
+	clickcd = CLICK_CD_CHARGED
 	warnie = "mobwarning"
 	hitsound = list('sound/combat/hits/bladed/genstab (1).ogg', 'sound/combat/hits/bladed/genstab (2).ogg', 'sound/combat/hits/bladed/genstab (3).ogg')
 	penfactor = 50
@@ -15,7 +15,6 @@
 
 /datum/intent/spear/thrust/militia
 	penfactor = 40
-	chargetime = 0
 
 /datum/intent/spear/bash
 	name = "bash"
@@ -112,7 +111,7 @@
 	reach = 1
 	penfactor = BLUNT_DEFAULT_PENFACTOR
 	damfactor = 2.5
-	chargetime = 10
+	clickcd = CLICK_CD_CHARGED
 	no_early_release = TRUE
 	hitsound = list('sound/combat/hits/bladed/genslash (1).ogg', 'sound/combat/hits/bladed/genslash (2).ogg', 'sound/combat/hits/bladed/genslash (3).ogg')
 	item_d_type = "slash"
@@ -123,7 +122,7 @@
 	name = "long rend"
 	penfactor = BLUNT_DEFAULT_PENFACTOR
 	misscost = 5
-	chargetime = 5
+	clickcd = CLICK_CD_HEAVY
 	damfactor = 2
 	reach = 2
 
@@ -131,7 +130,6 @@
 	name = "rending thrust"
 	attack_verb = list("skewers")
 	blade_class = BCLASS_STAB
-	chargetime = 10
 	swingdelay = 8
 	misscost = 20
 	damfactor = 1.8
@@ -147,10 +145,10 @@
 	animname = "cut"
 	blade_class = BCLASS_PEEL
 	hitsound = list('sound/combat/hits/blunt/metalblunt (1).ogg', 'sound/combat/hits/blunt/metalblunt (2).ogg', 'sound/combat/hits/blunt/metalblunt (3).ogg')
-	chargetime = 2
-	penfactor = 200
+	clickcd = CLICK_CD_CHARGED
+	penfactor = BLUNT_DEFAULT_PENFACTOR
 	swingdelay = 5
-	damfactor = 0.05
+	damfactor = 0.01
 	item_d_type = "slash"
 	peel_divisor = 4
 	reach = 2
@@ -1097,7 +1095,7 @@
 	blade_dulling = DULLING_SHAFT_REINFORCED
 
 /obj/item/rogueweapon/spear/naginata
-	name = "Naginata"
+	name = "naginata"
 	desc = "A traditional Kazengunese polearm, combining the reach of a spear with the cutting power of a curved blade. Due to the brittle quality of Kazengunese bladesmithing, weaponsmiths have adapted its blade to be easily replaceable when broken by a peg upon the end of the shaft."
 	force = 16
 	force_wielded = 30
