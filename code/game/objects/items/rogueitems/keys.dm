@@ -99,32 +99,6 @@
 	material = "silver"
 	is_silver = TRUE
 
-/obj/item/lockpick/goldpin/silver/pickup(mob/user)
-	. = ..()
-	var/mob/living/carbon/human/H = user
-	if(!H.mind)
-		return
-	var/datum/antagonist/vampirelord/V_lord = H.mind.has_antag_datum(/datum/antagonist/vampirelord/)
-	var/datum/antagonist/werewolf/W = H.mind.has_antag_datum(/datum/antagonist/werewolf/)
-	if(ishuman(H))
-		if(H.mind.has_antag_datum(/datum/antagonist/vampirelord/lesser))
-			to_chat(H, span_userdanger("I can't pick up the silver, it is my BANE!"))
-			H.Knockdown(10)
-			H.Paralyze(10)
-			H.adjustFireLoss(25)
-			H.fire_act(1,10)
-		if(V_lord)
-			if(V_lord.vamplevel < 4 && !H.mind.has_antag_datum(/datum/antagonist/vampirelord/lesser))
-				to_chat(H, span_userdanger("I can't pick up the silver, it is my BANE!"))
-				H.Knockdown(10)
-				H.adjustFireLoss(25)
-		if(W && W.transformed == TRUE)
-			to_chat(H, span_userdanger("I can't pick up the silver, it is my BANE!"))
-			H.Knockdown(10)
-			H.Paralyze(10)
-			H.adjustFireLoss(25)
-			H.fire_act(1,10)
-
 /obj/item/roguekey/lord
 	name = "master key"
 	desc = "The Lord's key."
@@ -263,11 +237,11 @@
 	icon_state = "greenkey"
 	lockid = "innkeep"
 
-/obj/item/roguekey/velder
-	name = "elder's key"
-	desc = "This key should open and close the elder's home."
-	icon_state = "brownkey"
-	lockid = "velder"
+/obj/item/roguekey/crier
+	name = "crier's key"
+	desc = "This key should open and close the crier's office."
+	icon_state = "cheesekey"
+	lockid = "crier"
 
 /obj/item/roguekey/tavern/village
 	lockid = "vtavern"
@@ -601,6 +575,36 @@
 	name = "stable ii key"
 	icon_state = "brownkey"
 	lockid = "stable2"
+
+/obj/item/roguekey/apartments/stablemaster_1
+	name = "stable i key"
+	icon_state = "brownkey"
+	lockid = "stable_master_1"
+
+/obj/item/roguekey/apartments/stablemaster_2
+	name = "stable ii key"
+	icon_state = "brownkey"
+	lockid = "stable_master_2"
+
+/obj/item/roguekey/apartments/stablemaster_3
+	name = "stable iii key"
+	icon_state = "brownkey"
+	lockid = "stable_master_3"
+
+/obj/item/roguekey/apartments/stablemaster_4
+	name = "stable iv key"
+	icon_state = "brownkey"
+	lockid = "stable_master_4"
+
+/obj/item/roguekey/apartments/stablemaster_5
+	name = "stable v key"
+	icon_state = "brownkey"
+	lockid = "stable_master_5"
+
+/obj/item/roguekey/apartments/stablemaster
+	name = "stablemaster key"
+	icon_state = "brownkey"
+	lockid = "stablemaster"
 
 //custom key
 /obj/item/roguekey/custom

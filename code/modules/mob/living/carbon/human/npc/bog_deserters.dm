@@ -140,7 +140,7 @@
 	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_LEECHIMMUNE, INNATE_TRAIT)
-	ADD_TRAIT(src, TRAIT_INFINITE_ENERGY, TRAIT_GENERIC)
+	ADD_TRAIT(src, TRAIT_BREADY, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_KNEESTINGER_IMMUNITY, TRAIT_GENERIC) //For when they're just kinda patrolling around/ambushes
 	equipOutfit(new /datum/outfit/job/roguetown/human/northern/bog_deserters)
@@ -200,7 +200,7 @@
 	H.STASTR = rand(14,16)
 	H.STASPD = 11
 	H.STACON = rand(11,13)
-	H.STAEND = 13
+	H.STAWIL = 13
 	H.STAPER = 11
 	H.STAINT = 11
 	//Chest Gear
@@ -251,7 +251,7 @@
 	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_LEECHIMMUNE, INNATE_TRAIT)
-	ADD_TRAIT(src, TRAIT_INFINITE_ENERGY, TRAIT_GENERIC)
+	ADD_TRAIT(src, TRAIT_BREADY, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_KNEESTINGER_IMMUNITY, TRAIT_GENERIC) //For when they're just kinda patrolling around/ambushes
 	equipOutfit(new /datum/outfit/job/roguetown/human/northern/bog_deserters/better_gear)
@@ -288,7 +288,7 @@
 	H.STASTR = rand(14,16)
 	H.STASPD = 11
 	H.STACON = rand(11,13)
-	H.STAEND = 13
+	H.STAWIL = 13
 	H.STAPER = 11
 	H.STAINT = 11
 	//Chest Gear

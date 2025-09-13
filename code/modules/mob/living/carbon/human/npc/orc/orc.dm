@@ -16,7 +16,6 @@
 	d_intent = INTENT_PARRY
 	possible_mmb_intents = list(INTENT_STEAL, INTENT_JUMP, INTENT_KICK, INTENT_BITE)
 	possible_rmb_intents = list(/datum/rmb_intent/feint, /datum/rmb_intent/aimed, /datum/rmb_intent/strong, /datum/rmb_intent/weak, /datum/rmb_intent/swift, /datum/rmb_intent/riposte)
-	possible_rmb_intents = list()
 
 /mob/living/carbon/human/species/orc/npc
 	faction = list("orcs", "station")
@@ -50,7 +49,7 @@
 	ADD_TRAIT(src, TRAIT_LEECHIMMUNE, INNATE_TRAIT)
 	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_INFINITE_ENERGY, TRAIT_GENERIC)
+	ADD_TRAIT(src, TRAIT_BREADY, TRAIT_GENERIC)
 
 	var/datum/bodypart_feature/hair/head/new_hair = new()
 	var/datum/bodypart_feature/hair/facial/new_facial = new()
@@ -102,7 +101,7 @@
 	H.STASTR = 16
 	H.STASPD = 8
 	H.STACON = 15
-	H.STAEND = 15
+	H.STAWIL = 15
 	H.STAINT = 6
 
 	//light labor skills for armor repairs and such, equipment is so-so, with good stats

@@ -9,6 +9,7 @@ GLOBAL_PROTECT(admin_verbs_default)
 	/client/proc/adjust_pq,
 	/client/proc/hearallasghost,
 	/client/proc/hearglobalLOOC,
+	/client/proc/togglespawnmessages,
 	/client/proc/toggle_aghost_invis,
 	/client/proc/admin_ghost,
 	/datum/admins/proc/start_vote,
@@ -194,6 +195,7 @@ GLOBAL_PROTECT(admin_verbs_debug)
 	/client/proc/test_movable_UI,
 	/client/proc/test_snap_UI,
 	/client/proc/check_bomb_impacts,
+	/client/proc/debug_influences,
 	/client/proc/get_dynex_power,		//*debug verbs for dynex explosions.
 	/client/proc/get_dynex_range,		//*debug verbs for dynex explosions.
 	/client/proc/set_dynex_scale,

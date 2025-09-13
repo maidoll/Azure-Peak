@@ -77,6 +77,10 @@
 				if(istype(AR, /obj/item/ammo_casing/caseless/rogue/arrow))
 					arrows -= AR
 					B.attackby(AR, loc, params)
+					if(ismob(loc))
+						var/mob/M = loc
+						if(HAS_TRAIT(M, TRAIT_COMBAT_AWARE))
+							M.balloon_alert(M, "[length(arrows)] left...")
 					break
 		return
 	..()
@@ -115,6 +119,14 @@
 		var/obj/item/ammo_casing/caseless/rogue/bolt/A = new()
 		arrows += A
 	update_icon()
+
+/obj/item/quiver/holybolts/Initialize()
+	..()
+	for(var/i in 1 to max_storage)
+		var/obj/item/ammo_casing/caseless/rogue/bolt/holy/A = new()
+		arrows += A
+	update_icon()
+
 
 /obj/item/quiver/Wbolts/Initialize()
 	..()

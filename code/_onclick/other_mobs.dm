@@ -47,7 +47,7 @@
 			if(L.has_status_effect(/datum/status_effect/buff/necras_vow))
 				if(isnull(mind))
 					adjust_fire_stacks(5)
-					IgniteMob()
+					ignite_mob()
 				else
 					if(prob(30))
 						to_chat(src, span_warning("The Undermaiden protects me!"))
@@ -470,7 +470,7 @@
 										SEND_SIGNAL(U, COMSIG_ITEM_STOLEN, V)
 										record_featured_stat(FEATURED_STATS_THIEVES, U)
 										record_featured_stat(FEATURED_STATS_CRIMINALS, U)
-										GLOB.azure_round_stats[STATS_ITEMS_PICKPOCKETED]++
+										record_round_statistic(STATS_ITEMS_PICKPOCKETED)
 								else
 									exp_to_gain /= 2 // these can be removed or changed on reviewer's discretion
 									to_chat(src, span_warning("I didn't find anything there. Perhaps I should look elsewhere."))

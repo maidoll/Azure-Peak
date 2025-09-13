@@ -179,6 +179,7 @@
 
 #define MACE_SMASH			/datum/intent/mace/smash
 #define MACE_STRIKE			/datum/intent/mace/strike
+#define AXE_SMASH			/datum/intent/mace/smash/flataxe
 
 #define DAGGER_CUT			/datum/intent/dagger/cut
 #define DAGGER_THRUST		/datum/intent/dagger/thrust
@@ -214,6 +215,7 @@
 #define BCLASS_PEEL			"peel"
 #define BCLASS_PUNISH		"punish"
 #define BCLASS_EFFECT		"effect"
+#define BCLASS_SUNDER       "sunder"
 
 //Material class (what material is striking)
 #define MCLASS_GENERIC		1
@@ -366,3 +368,6 @@ GLOBAL_LIST_INIT(shove_disarming_types, typecacheof(list(
 #define SHARPNESS_TIER2_THRESHOLD	0.25//%-age threshold when damage *really* falls off. Base damage value included.
 
 #define UNARMED_DAMAGE_DEFAULT		12
+
+/// Damage multiplier of silver weapons against mobs with TRAIT_SIMPLE_WOUNDS
+#define SILVER_SIMPLEMOB_DAM_MULT 2

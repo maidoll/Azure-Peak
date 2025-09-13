@@ -931,11 +931,6 @@
 	toggle_icon_state = FALSE
 	salvage_result = /obj/item/natural/hide/cured
 
-/obj/item/clothing/wash_act(clean)
-	. = ..()
-	if(hood)
-		wash_atom(hood,clean)
-
 /obj/item/clothing/cloak/raincloak/ComponentInitialize()
 	. = ..()
 	AddComponent(/datum/component/storage/concrete/roguetown/cloak)
@@ -982,14 +977,6 @@
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR|HIDETAIL
 	block2add = FOV_BEHIND
 
-/obj/item/clothing/head/hooded/equipped(mob/user, slot)
-	. = ..()
-	user.update_fov_angles()
-
-/obj/item/clothing/head/hooded/dropped(mob/user)
-	. = ..()
-	user.update_fov_angles()
-
 /obj/item/clothing/cloak/raincloak/furcloak
 	name = "fur cloak"
 	desc = "This glorious cloak is made of animal fur. Very soft and warm."
@@ -1034,6 +1021,9 @@
 	nodismemsleeves = TRUE
 	inhand_mod = FALSE
 	slot_flags = ITEM_SLOT_BACK_R|ITEM_SLOT_CLOAK
+
+/obj/item/clothing/cloak/cape/purple
+	color = CLOTHING_PURPLE
 
 /obj/item/clothing/cloak/cape/knight
 	color = CLOTHING_WHITE
@@ -1275,6 +1265,9 @@
 		var/list/things = STR.contents()
 		for(var/obj/item/I in things)
 			STR.remove_from_storage(I, get_turf(src))
+
+/obj/item/clothing/cloak/thief_cloak/yoruku
+	color = CLOTHING_BLACK
 
 /obj/item/clothing/cloak/templar
 	var/overarmor = TRUE
@@ -1605,12 +1598,12 @@
 		active_item = TRUE
 		if(user.mind.special_role == "Bandit")
 			to_chat(user, span_notice("I feel bolstered by Matthios' Power!"))
-			user.change_stat("strength", 2)
-			user.change_stat("perception", 2)
-			user.change_stat("intelligence", 2)
-			user.change_stat("constitution", 2)
-			user.change_stat("endurance", 2)
-			user.change_stat("speed", 2)
+			user.change_stat(STATKEY_STR, 2)
+			user.change_stat(STATKEY_PER, 2)
+			user.change_stat(STATKEY_INT, 2)
+			user.change_stat(STATKEY_CON, 2)
+			user.change_stat(STATKEY_WIL, 2)
+			user.change_stat(STATKEY_SPD, 2)
 			armor = getArmor("blunt" = 100, "slash" = 100, "stab" = 100, "piercing" = 100, "fire" = 50, "acid" = 0)
 		else
 			to_chat(user, span_notice("I feel an evil power about that necklace..."))
@@ -1623,12 +1616,12 @@
 	active_item = FALSE
 	if(user.mind.special_role == "Bandit")
 		to_chat(user, span_notice("I've removed the necklace of Matthios..."))
-		user.change_stat("strength", -2)
-		user.change_stat("perception", -2)
-		user.change_stat("intelligence", -2)
-		user.change_stat("constitution", -2)
-		user.change_stat("endurance", -2)
-		user.change_stat("speed", -2)
+		user.change_stat(STATKEY_STR, -2)
+		user.change_stat(STATKEY_PER, -2)
+		user.change_stat(STATKEY_INT, -2)
+		user.change_stat(STATKEY_CON, -2)
+		user.change_stat(STATKEY_WIL, -2)
+		user.change_stat(STATKEY_SPD, -2)
 	else
 		to_chat(user, span_notice("Strange, I don't feel that power anymore..."))
 		armor = getArmor("blunt" = 100, "slash" = 100, "stab" = 100, "piercing" = 100, "fire" = 50, "acid" = 0)
@@ -1763,13 +1756,9 @@
 	nodismemsleeves = TRUE
 	inhand_mod = TRUE
 
-/obj/item/clothing/cloak/graggar/pickup(mob/living/user)
-	if(!HAS_TRAIT(user, TRAIT_HORDE))
-		to_chat(user, "<font color='red'>UNWORTHY HANDS TOUCHING THIS CLOAK, CEASE OR BE RENDED ASUNDER!</font>")
-		user.adjust_fire_stacks(5)
-		user.IgniteMob()
-		user.Stun(40)
-	..()
+/obj/item/clothing/cloak/graggar/Initialize()
+	. = ..()
+	AddComponent(/datum/component/cursed_item, TRAIT_HORDE, "CLOAK", "RENDERED ASUNDER")
 
 /obj/item/clothing/cloak/forrestercloak
 	name = "forrester cloak"

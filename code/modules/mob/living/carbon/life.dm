@@ -63,22 +63,22 @@
 	if(HAS_TRAIT(src, TRAIT_NOPAIN))
 		return
 	if(!stat)
-		var/pain_threshold = HAS_TRAIT(src, TRAIT_ADRENALINE_RUSH) ? ((STACON + 5) * 10) : (STACON * 10)
-		if(has_flaw(/datum/charflaw/masochist)) // Masochists handle pain better by about 1 endurance point
+		var/pain_threshold = HAS_TRAIT(src, TRAIT_ADRENALINE_RUSH) ? ((STAWIL + 5) * 10) : (STAWIL * 10)
+		if(has_flaw(/datum/charflaw/addiction/masochist)) // Masochists handle pain better by about 1 endurance point
 			pain_threshold += 10
 		var/painpercent = get_complex_pain() / pain_threshold
 		painpercent = painpercent * 100
 
 		if(world.time > mob_timers["painstun"])
 			mob_timers["painstun"] = world.time + 100
-			var/probby = 40 - (STACON * 2)
+			var/probby = 40 - (STAWIL * 2)
 			probby = max(probby, 10)
 			if(lying || IsKnockdown())
 				if(prob(3) && (painpercent >= 80) )
 					emote("painmoan")
 			else
 				if(painpercent >= 100)
-					if(HAS_TRAIT(src, TRAIT_PSYDONIAN_GRIT) || STACON >= 15)
+					if(HAS_TRAIT(src, TRAIT_PSYDONIAN_GRIT) || STAWIL >= 15)
 						if(prob(25)) // PSYDONIC WEIGHTED COINFLIP. TWEAK THIS AS THOU WILT. DON'T LET THEM BE BROKEN, PSYDON WILLING. THROW CON-MAXXERS A BONE, TOO.
 							Immobilize(15) // EAT A MICROSTUN. YOU'RE AVOIDING A PAINCRIT.
 							if(HAS_TRAIT(src, TRAIT_PSYDONIAN_GRIT))
@@ -130,7 +130,7 @@
 				T.pollution.smell_act(src)
 
 /mob/living/proc/handle_inwater()
-	ExtinguishMob()
+	extinguish_mob()
 
 /mob/living/carbon/handle_inwater()
 	..()
@@ -138,7 +138,7 @@
 		if(HAS_TRAIT(src, TRAIT_NOBREATH) || HAS_TRAIT(src, TRAIT_WATERBREATHING))
 			return TRUE
 		if(stat == DEAD && client)
-			GLOB.azure_round_stats[STATS_PEOPLE_DROWNED]++
+			record_round_statistic(STATS_PEOPLE_DROWNED)
 		var/drown_damage = has_world_trait(/datum/world_trait/abyssor_rage) ? 10 : 5
 		adjustOxyLoss(drown_damage)
 		emote("drown")
