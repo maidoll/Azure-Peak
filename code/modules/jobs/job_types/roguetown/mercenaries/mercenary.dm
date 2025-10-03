@@ -16,7 +16,7 @@
 	outfit = null	//Handled by classes
 	outfit_female = null
 	advclass_cat_rolls = list(CTAG_MERCENARY = 20)
-	job_traits = list(TRAIT_OUTLANDER, TRAIT_STEELHEARTED)
+	job_traits = list(TRAIT_STEELHEARTED)
 	always_show_on_latechoices = TRUE
 	class_categories = TRUE
 	job_subclasses = list(
@@ -33,6 +33,7 @@
 		/datum/advclass/mercenary/grenzelhoft,
 		/datum/advclass/mercenary/grenzelhoft/halberdier,
 		/datum/advclass/mercenary/grenzelhoft/crossbowman,
+		/datum/advclass/mercenary/grenzelhoft/mage,
 		/datum/advclass/mercenary/routier,
 		/datum/advclass/mercenary/rumaclan,
 		/datum/advclass/mercenary/rumaclan/sasu,
@@ -47,11 +48,3 @@
 		/datum/advclass/mercenary/grudgebearer,
 		/datum/advclass/mercenary/grudgebearer/soldier
 	)
-
-/datum/job/roguetown/mercenary/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
-	..()
-	if(L)
-		var/mob/living/carbon/human/H = L
-		H.advsetup = 1
-		H.invisibility = INVISIBILITY_MAXIMUM
-		H.become_blind("advsetup")

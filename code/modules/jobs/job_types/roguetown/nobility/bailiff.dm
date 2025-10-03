@@ -50,14 +50,6 @@
 	H.verbs |= /mob/proc/haltyell
 	H.verbs |= list(/mob/living/carbon/human/proc/request_outlaw, /mob/living/carbon/human/proc/request_law, /mob/living/carbon/human/proc/request_law_removal, /mob/living/carbon/human/proc/request_purge)
 
-/datum/job/roguetown/marshal/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
-	. = ..()
-	if(ishuman(L))
-		var/mob/living/carbon/human/H = L
-		H.advsetup = 1
-		H.invisibility = INVISIBILITY_MAXIMUM
-		H.become_blind("advsetup")
-
 /datum/advclass/marshal/classic
 	name = "Marshal"
 	tutorial = "You've spent your daes in the courts and garrisons of the city. You've studied the law tome from back to front and enforce your word with the iron hand of justice, and the iron mace in your hands. More men have spent days rotting in the dungeon than that Knight Commander could ever have claimed, and every person in the realm respects your authority in matters of law and order."
@@ -87,7 +79,7 @@
 	)
 
 /datum/outfit/job/roguetown/marshal/classic/pre_equip(mob/living/carbon/human/H)
-	armor = /obj/item/clothing/suit/roguetown/armor/brigandine/sheriff
+	armor = /obj/item/clothing/suit/roguetown/armor/brigandine/retinue
 	cloak = /obj/item/clothing/cloak/stabard/surcoat/bailiff
 	backr = /obj/item/rogueweapon/mace/cudgel/justice
 	belt = /obj/item/storage/belt/rogue/leather/plaquegold
@@ -124,7 +116,7 @@
 	)
 
 /datum/outfit/job/roguetown/marshal/kcommander/pre_equip(mob/living/carbon/human/H)
-	armor = /obj/item/clothing/suit/roguetown/armor/brigandine/sheriff/coat
+	armor = /obj/item/clothing/suit/roguetown/armor/brigandine/retinue/coat
 	backr = /obj/item/rogueweapon/sword/long/oathkeeper
 	belt = /obj/item/storage/belt/rogue/leather
 	beltr = /obj/item/storage/belt/rogue/pouch/coins/rich

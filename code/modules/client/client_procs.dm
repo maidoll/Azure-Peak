@@ -1000,9 +1000,9 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 		if (CONFIG_GET(flag/asset_simple_preload))
 			addtimer(CALLBACK(SSassets.transport, TYPE_PROC_REF(/datum/asset_transport, send_assets_slow), src, SSassets.transport.preload), 5 SECONDS)
 
-		#if (PRELOAD_RSC == 0)
-		addtimer(CALLBACK(src, TYPE_PROC_REF(/client, preload_vox)), 1 MINUTES)
-		#endif
+		// #if (PRELOAD_RSC == 0)
+		// addtimer(CALLBACK(src, TYPE_PROC_REF(/client, preload_vox)), 1 MINUTES)
+		// #endif
 
 //Hook, override it to run code when dir changes
 //Like for /atoms, but clients are their own snowflake FUCK
@@ -1197,3 +1197,7 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 		log_admin("COMMEND: [ckey] commends [theykey].")
 	return
 
+/client/proc/preload_music()
+	if(SSsounds.initialized == TRUE)
+		for(var/sound_path as anything in SSsounds.all_music_sounds)
+			src << load_resource(sound_path, -1)

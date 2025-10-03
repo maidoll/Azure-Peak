@@ -45,11 +45,6 @@ GLOBAL_LIST_EMPTY(lord_titles)
 
 /datum/job/roguetown/lord/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
 	. = ..()
-	if(ishuman(L))
-		var/mob/living/carbon/human/Q = L
-		Q.advsetup = 1
-		Q.invisibility = INVISIBILITY_MAXIMUM
-		Q.become_blind("advsetup")
 	if(L)
 		var/list/chopped_name = splittext(L.real_name, " ")
 		if(length(chopped_name) > 1)
@@ -212,7 +207,7 @@ GLOBAL_LIST_EMPTY(lord_titles)
 		/datum/skill/misc/riding = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/misc/reading = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/craft/cooking = SKILL_LEVEL_NOVICE,
-		/datum/skill/misc/sewing = SKILL_LEVEL_NOVICE,
+		/datum/skill/craft/sewing = SKILL_LEVEL_NOVICE,
 	)
 
 /datum/outfit/job/roguetown/lord/inbred/pre_equip(mob/living/carbon/human/H)
@@ -346,7 +341,7 @@ GLOBAL_LIST_EMPTY(lord_titles)
 	if(QDELETED(recruit) || QDELETED(recruiter))
 		return FALSE
 	if(HAS_TRAIT(recruit, TRAIT_NOBLE))
-		if(!HAS_TRAIT(recruit,TRAIT_OUTLANDER))
+		if(!(recruit.job in GLOB.foreign_positions))
 			recruiter.say("I HEREBY STRIP YOU, [uppertext(recruit.name)], OF NOBILITY!!")
 			REMOVE_TRAIT(recruit, TRAIT_NOBLE, TRAIT_GENERIC)
 			REMOVE_TRAIT(recruit, TRAIT_NOBLE, TRAIT_VIRTUE)
@@ -356,7 +351,6 @@ GLOBAL_LIST_EMPTY(lord_titles)
 			return FALSE
 	recruiter.say("I HEREBY GRANT YOU, [uppertext(recruit.name)], NOBILITY!")
 	ADD_TRAIT(recruit, TRAIT_NOBLE, TRAIT_GENERIC)
-	REMOVE_TRAIT(recruit, TRAIT_OUTLANDER, ADVENTURER_TRAIT)
 	return TRUE
 
 /obj/effect/proc_holder/spell/self/convertrole/servant

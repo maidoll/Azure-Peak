@@ -6,7 +6,7 @@
 	outfit = /datum/outfit/job/roguetown/wretch/necromancer
 	cmode_music = 'sound/music/combat_heretic.ogg'
 	category_tags = list(CTAG_WRETCH)
-	traits_applied = list(TRAIT_ZOMBIE_IMMUNE, TRAIT_MAGEARMOR, TRAIT_GRAVEROBBER, TRAIT_ARCYNE_T3)
+	traits_applied = list(TRAIT_ZOMBIE_IMMUNE, TRAIT_MAGEARMOR, TRAIT_GRAVEROBBER, TRAIT_ARCYNE_T3, TRAIT_ALCHEMY_EXPERT, TRAIT_MEDICINE_EXPERT)
 	maximum_possible_slots = 3 //Onutsio said 2 was stupid
 	// Necromancer get the most +4 Int, +2 Perception just like Sorc (Adv Mage), and a bit of endurance / speed
 	subclass_stats = list(
@@ -15,7 +15,7 @@
 		STATKEY_WIL = 1,
 		STATKEY_SPD = 1
 	)
-	subclass_spellpoints = 18
+	subclass_spellpoints = 12
 	subclass_skills = list(
 		/datum/skill/combat/polearms = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/climbing = SKILL_LEVEL_JOURNEYMAN,
@@ -60,6 +60,8 @@
 		H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/bonechill)
 		H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/minion_order)
 		H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/gravemark)
-		H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/raise_lesser_undead/necromancer)
+		H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/raise_undead_formation/necromancer)
+		H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/raise_undead_guard)
 		H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/convert_heretic)
+		H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/tame_undead)
 		wretch_select_bounty(H)

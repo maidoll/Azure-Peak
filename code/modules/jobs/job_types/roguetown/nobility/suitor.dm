@@ -20,15 +20,7 @@
 	max_pq = null
 	round_contrib_points = 3
 	cmode_music = 'sound/music/combat_noble.ogg'
-	job_traits = list(TRAIT_NOBLE, TRAIT_OUTLANDER)
-
-/datum/job/roguetown/suitor/after_spawn(mob/living/H, mob/M, latejoin)
-	. = ..()
-	if(ishuman(H))
-		var/mob/living/carbon/human/Q = H
-		Q.advsetup = 1
-		Q.invisibility = INVISIBILITY_MAXIMUM
-		Q.become_blind("advsetup")
+	job_traits = list(TRAIT_NOBLE)
 
 /datum/outfit/job/roguetown/suitor
 	job_bitflag = BITFLAG_ROYALTY
@@ -56,7 +48,7 @@
 		/datum/skill/misc/riding = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/craft/crafting = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/craft/cooking = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/misc/sewing = SKILL_LEVEL_JOURNEYMAN,
+		/datum/skill/craft/sewing = SKILL_LEVEL_JOURNEYMAN,
 	)
 
 /datum/outfit/job/roguetown/suitor/envoy/pre_equip(mob/living/carbon/human/H)
@@ -94,6 +86,7 @@
 	name = "Schemer"
 	tutorial = "You're a silver-tongued snake - master of whispers, poison, and perfectly timed accidents. Why win hearts when you can twist them? With rivals removed and secrets weaponized, the Duke will have no choice but to choose you."
 	outfit = /datum/outfit/job/roguetown/suitor/schemer
+	traits_applied = list(TRAIT_ALCHEMY_EXPERT)
 	category_tags = list(CTAG_CONSORT)
 	subclass_stats = list(
 		STATKEY_SPD = 3,

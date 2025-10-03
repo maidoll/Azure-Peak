@@ -26,7 +26,7 @@
 	// Can't get very far as a magician if you can't chant spells now can you?
 	vice_restrictions = list(/datum/charflaw/mute)
 
-	job_traits = list(TRAIT_MAGEARMOR, TRAIT_ARCYNE_T4, TRAIT_SEEPRICES, TRAIT_INTELLECTUAL)
+	job_traits = list(TRAIT_MAGEARMOR, TRAIT_ARCYNE_T4, TRAIT_SEEPRICES, TRAIT_INTELLECTUAL, TRAIT_ALCHEMY_EXPERT)
 	job_subclasses = list(
 		/datum/advclass/courtmage
 	)
@@ -68,14 +68,6 @@
 /datum/outfit/job/roguetown/magician
 	job_bitflag = BITFLAG_ROYALTY
 	has_loadout = TRUE
-
-/datum/job/roguetown/magician/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
-	..()
-	if(ishuman(L))
-		var/mob/living/carbon/human/H = L
-		H.advsetup = 1
-		H.invisibility = INVISIBILITY_MAXIMUM
-		H.become_blind("advsetup")
 
 /datum/outfit/job/roguetown/magician/choose_loadout(mob/living/carbon/human/H)
 	. = ..()
