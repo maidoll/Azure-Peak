@@ -455,7 +455,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	smoketime = 120
 	chem_volume = 100
 	list_reagents = null
-	var/packeditem = 0
+	var/packeditem = FALSE
 	slot_flags = ITEM_SLOT_MOUTH
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/mouth_items.dmi'
 	icon = 'icons/roguetown/items/lighting.dmi'
@@ -483,22 +483,18 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	. = ..()
 
 /obj/item/clothing/mask/cigarette/pipe/process()
-	if(smoketime <= 0 || !packeditem)
-		packeditem = 0
-		smoketime = 0
-		STOP_PROCESSING(SSobj, src)
-		return
 	smoketime = max(smoketime -1, 0)
-	if(smoketime <= 0)
+	if(smoketime <= 0 || !packeditem)
 		if(ismob(loc))
 			var/mob/living/M = loc
 			to_chat(M, span_notice("The [name] goes out."))
-			lit = 0
+			lit = FALSE
 			icon_state = icon_off
 			item_state = icon_off
 			M.update_inv_mouth()
-			packeditem = 0
-			name = "empty [initial(name)]"
+			name = "[initial(name)]"
+		smoketime = 0
+		packeditem = FALSE
 		STOP_PROCESSING(SSobj, src)
 		return
 	open_flame()
@@ -510,10 +506,10 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	if(istype(O, /obj/item/reagent_containers/food/snacks/grown))
 		var/obj/item/reagent_containers/food/snacks/grown/G = O
 		if(!packeditem)
-			if(G.dry == 1)
+			if(G.dry == TRUE)
 				to_chat(user, span_notice("I stuff [O] into [src]."))
 				smoketime = initial(smoketime)
-				packeditem = 1
+				packeditem = TRUE
 //				name = "[O.name]-packed [initial(name)]"
 				if(G.pipe_reagents?.len)
 					reagents.add_reagent_list(G.pipe_reagents)
@@ -528,7 +524,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		if(!packeditem)
 			to_chat(user, span_notice("I stuff [O] into [src]."))
 			smoketime = initial(smoketime)
-			packeditem = 1
+			packeditem = TRUE
 			if(G.list_reagents?.len)
 				reagents.add_reagent_list(G.list_reagents)
 			qdel(O)
@@ -549,7 +545,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	if(lit)
 		name = copytext(name,5,length(name)+1)
 		user.visible_message(span_notice("[user] puts out [src]."), span_notice("I put out [src]."))
-		lit = 0
+		lit = FALSE
 		set_light_on(FALSE)
 		icon_state = icon_off
 		item_state = icon_off
@@ -559,7 +555,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		smoketime = 0
 		to_chat(user, span_notice("I empty [src] onto [location]."))
 		new /obj/item/ash(location)
-		packeditem = 0
+		packeditem = FALSE
 		reagents.clear_reagents()
 //		name = "empty [initial(name)]"
 	return
