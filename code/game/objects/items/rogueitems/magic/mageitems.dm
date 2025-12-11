@@ -66,7 +66,7 @@
 
 /obj/item/chalk/examine(mob/user)
 	. = ..()
-	desc += "It has [amount] uses left."
+	. += "It has [amount] uses left."
 
 /obj/item/chalk/attackby(obj/item/M, mob/user, params)
 	if(istype(M,/obj/item/rogueore/cinnabar))
