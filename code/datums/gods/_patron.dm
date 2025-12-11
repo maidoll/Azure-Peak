@@ -57,7 +57,6 @@ GLOBAL_LIST_EMPTY(prayers)
 /// Called when a patron's follower attempts to pray.
 /// Returns TRUE if they satisfy the needed conditions.
 /datum/patron/proc/can_pray(mob/living/follower)
-	SHOULD_CALL_PARENT(TRUE)
 	// Allows death-bed prayers
 	SHOULD_CALL_PARENT(TRUE)
 	if(follower.has_status_effect(STATUS_EFFECT_UNCONSCIOUS))
