@@ -471,12 +471,13 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 
 /obj/item/clothing/mask/cigarette/pipe/crafted/Initialize()
 	. = ..()
+	src.smoketime = 0
 	if(prob(50))
-		name = "westman pipe"
-		icon_state = "longpipeoff"
-		item_state = "longpipeoff"
-		icon_on = "longpipeon"
-		icon_off = "longpipeoff"
+		var/atom/current_loc = loc
+		var/obj/item/clothing/mask/cigarette/pipe/westman/W = new /obj/item/clothing/mask/cigarette/pipe/westman(current_loc)
+		W.smoketime = 0
+		qdel(src)
+		return INITIALIZE_HINT_QDEL
 
 /obj/item/clothing/mask/cigarette/pipe/Destroy()
 	STOP_PROCESSING(SSobj, src)
@@ -492,7 +493,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 			icon_state = icon_off
 			item_state = icon_off
 			M.update_inv_mouth()
-			name = "[initial(name)]"
+			name = copytext(name,5,length(name)+1)
 		smoketime = 0
 		packeditem = FALSE
 		STOP_PROCESSING(SSobj, src)
